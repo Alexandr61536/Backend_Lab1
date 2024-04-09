@@ -1,15 +1,16 @@
 import React, {useState} from 'react'
 import './Form.css'
+import Responce from '../Responce/Responce'
 
 export default function Form(props){
     const [fio, setfio] = useState('')
     const [sex, setsex] = useState('')
     const [country, setcountry] = useState('')
 
-    let responce = ''
+    const [responce, setresponce] = useState('')
 
     const send_results = async() => {
-        await fetch(this.props.host+this.props.form_request_route, {
+        fetch(props.host+props.form_request_route, {
             method: 'POST',
             headers:{
                 'content-type': 'application/json;charser=utf-8'
@@ -19,7 +20,7 @@ export default function Form(props){
         })
         .then(responce => {
             responce.json().then(res=>{
-                responce = JSON.stringify(res)
+                setresponce(res.body)
             })
             
         })
@@ -27,7 +28,7 @@ export default function Form(props){
 
     return(
         <div className='Form'>
-            <form>
+            {/* <form> */}
                 <table>
                     <tbody>
                         <tr>
@@ -82,7 +83,7 @@ export default function Form(props){
                         </tr>
                         <tr>
                             <td colSpan={2}>
-                                <button>
+                                <button onClick={send_results}>
                                     Send
                                 </button>
                             </td>
@@ -92,7 +93,10 @@ export default function Form(props){
                         </tr>
                     </tbody>
                 </table>
-            </form>
+            {/* </form> */}
+            <Responce 
+                responce = {responce}
+            />
         </div>
     )
 }

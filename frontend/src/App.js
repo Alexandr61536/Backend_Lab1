@@ -8,7 +8,6 @@ class App extends Component {
     main_host: "http://127.0.0.1:3010",
     routes: {
       form_request: "/api/form_request",
-      form_response: "/api/form_response",
     }
   }
   render(){
